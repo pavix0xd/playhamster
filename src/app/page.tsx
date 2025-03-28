@@ -9,8 +9,8 @@ const SplashScreen = () => {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setFadeOut(true), 2000); // Start fade-out after 2s
-    setTimeout(() => router.push('/home'), 2500); // Navigate to home after 2.5s
+    setTimeout(() => setFadeOut(true), 5000); // Start fade-out after 5s
+    setTimeout(() => router.push('/home'), 5000); // Navigate to home.
   }, [router]);
 
   return (
@@ -18,8 +18,8 @@ const SplashScreen = () => {
       <Image 
         src="/images/playhamster.png"
         alt="PlayHamster logo"
-        width={200} 
-        height={200} 
+        width={450} 
+        height={450} 
         className="neon-glow"
       />
 
@@ -32,7 +32,7 @@ const SplashScreen = () => {
         }
 
         .neon-glow {
-          animation: neonPulse 1.5s infinite alternate;
+          animation: neonPulse 7s infinite alternate;
         }
       `}</style>
     </div>
