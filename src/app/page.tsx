@@ -1,42 +1,29 @@
-'use client';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-
-const SplashScreen = () => {
-  const router = useRouter();
-  const [fadeOut, setFadeOut] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setFadeOut(true), 4000); // Start fade-out after 5s
-    setTimeout(() => router.push('/home'), 4000); // Navigate to home.
-  }, [router]);
-
+export default function LandingPage() {
   return (
-    <div className={`flex justify-center items-center h-screen bg-black transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
-      <Image 
-        src="/images/playhamster.png"
-        alt="PlayHamster logo"
-        width={70} 
-        height={70} 
-        className="neon-glow"
-      />
+    <div className="position-relative vh-100 overflow-hidden">
+      {/* Video Background */}
+      <video
+        className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/ghost.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-      {/* Custom CSS for Neon Glow Animation */}
-      <style jsx>{`
-        @keyframes neonPulse {
-          0% { filter: drop-shadow(0px 0px 5px red); }
-          50% { filter: drop-shadow(0px 0px 15px red); }
-          100% { filter: drop-shadow(0px 0px 5px red); }
-        }
+      {/* Overlay */}
+      <div className="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-        .neon-glow {
-          animation: neonPulse 7s infinite alternate;
-        }
-      `}</style>
+      {/* Content */}
+      <div className="position-absolute top-50 start-50 translate-middle text-center text-white">
+        <h1 className="display-4 fw-bold">Welcome to PlaYHamsteR</h1>
+        <p className="lead">Track upcoming PC game releases & discounts.</p>
+        <button className="btn btn-danger btn-lg">Get Started</button>
+      </div>
     </div>
   );
-};
-
-export default SplashScreen;
+}
