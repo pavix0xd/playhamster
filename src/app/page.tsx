@@ -10,17 +10,11 @@ export default function LandingPage() {
   const [sectionVisible, setSectionVisible] = useState(false);
 
   useEffect(() => {
-    // Scroll handler to trigger animation continuously
     const handleScroll = () => {
       const section = document.getElementById("next-section");
       if (section) {
         const rect = section.getBoundingClientRect();
-        // Trigger animation when section is near viewport
-        if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
-          setSectionVisible(true);
-        } else {
-          setSectionVisible(false);
-        }
+        setSectionVisible(rect.top < window.innerHeight * 0.75 && rect.bottom > 0);
       }
     };
 
@@ -29,124 +23,130 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div>
+    <div className="landing-page">
       {/* Hero Section */}
-      <section className="position-relative vh-100 overflow-hidden bg-black text-neon-red">
+      <section className="hero vh-100 position-relative d-flex flex-column justify-content-center align-items-center text-center">
         {/* Background Video */}
-        <video
-          className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-50"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
+        <video className="bg-video" autoPlay loop muted playsInline>
           <source src="/ghost.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
-        {/* Background Gradient */}
-        <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient"></div>
-        
         {/* Logo */}
-        <div className="position-absolute top-0 start-0 ms-4 mt-4">
-          <Image 
-            src="/images/playhamster.png" 
-            alt="PlaYHamsteR Logo" 
-            width={100} 
-            height={100} 
-            className="neon-glow animate__pulse"
-          />
+        <div className="logo-container">
+          <Image src="/images/playhamster.png" alt="PlaYHamsteR Logo" width={100} height={100} />
         </div>
 
-        {/* Login Button (Top Right) */}
-        <div className="position-absolute top-0 end-0 me-4 mt-4">
-          <a href="/login" className="btn neon-btn animate__fadeIn">Login</a>
-        </div>
-        
         {/* Content */}
-        <div className="position-absolute top-50 start-50 translate-middle text-center text-neon-red">
-          <h1 className="display-1 fw-bold animate__fadeInDown" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>Welcome to PlaYHamsteR</h1>
-          <p className="lead animate__fadeInUp" style={{ fontFamily: "'Anton', sans-serif" }}>Track upcoming PC game releases & discounts.</p>
-          <button className="btn neon-btn animate__pulse">Get Started</button>
-        </div>
+        <h1 className="display-1 fw-bold animate__fadeInDown">Welcome to PlaYHamsteR</h1>
+        <p className="lead animate__fadeInUp">Track upcoming PC game releases & discounts.</p>
+        <button className="btn neon-btn animate__pulse">Get Started</button>
+
+        {/* Login Button */}
+        <a href="/login" className="login-btn">Login</a>
       </section>
-      
+
       {/* Second Section */}
-      <section 
-        id="next-section" 
-        className={`vh-100 position-relative bg-black text-white d-flex align-items-center justify-content-center 
-          ${sectionVisible ? 'animate__fadeInUp' : 'opacity-0'} transition-all duration-700`}
-      >
-        {/* Background Video */}
-        <video
-          className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-50"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
+      <section id="next-section" className={`info-section ${sectionVisible ? 'visible' : 'hidden'}`}>
+        <video className="bg-video" autoPlay loop muted playsInline>
           <source src="/batman.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        
-        <div className="position-relative text-center">
-          <h2 className="display-3 animate__fadeInLeft" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>Discover the Best Deals</h2>
-          <p className="lead animate__fadeInRight" style={{ fontFamily: "'Anton', sans-serif" }}>Get the latest discounts on top PC games.</p>
+
+        <div className="text-container">
+          <h2 className="display-3 animate__fadeInLeft">Discover the Best Deals</h2>
+          <p className="lead animate__fadeInRight">Get the latest discounts on top PC games.</p>
         </div>
       </section>
 
       {/* Custom Styles */}
       <style jsx>{`
-        .bg-gradient {
-          background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(255,7,58,0.2) 100%);
+        .landing-page {
+          background-color: black;
+          color: white;
+          font-family: 'Bebas Neue', sans-serif;
         }
-        .neon-glow {
-          filter: drop-shadow(0 0 5px #ff073a) drop-shadow(0 0 10px #ff073a);
+
+        .hero {
+          position: relative;
+          overflow: hidden;
+          text-align: center;
+          color: #ff073a;
         }
+
+        .bg-video {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.5;
+        }
+
+        .logo-container {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          filter: drop-shadow(0 0 5px #ff073a);
+        }
+
         .neon-btn {
           background-color: #ff073a;
           color: black;
           font-size: 1.5rem;
-          font-family: 'Anton', sans-serif;
           border: none;
-          padding: 10px 20px;
+          padding: 12px 24px;
+          margin-top: 15px;
           transition: 0.3s ease-in-out;
         }
+
         .neon-btn:hover {
           background-color: black;
           color: #ff073a;
           box-shadow: 0 0 10px #ff073a;
         }
-        .text-neon-red {
-          color: #ff073a !important;
+
+        .login-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          font-size: 1.2rem;
+          background-color: #ff073a;
+          color: black;
+          padding: 8px 16px;
+          border-radius: 5px;
+          transition: 0.3s ease-in-out;
         }
 
-        /* Custom Animations */
-        @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        .login-btn:hover {
+          background-color: black;
+          color: #ff073a;
+          box-shadow: 0 0 10px #ff073a;
         }
 
-        .animate__fadeInDown {
-          animation: fadeInDown 0.7s ease-out;
+        .info-section {
+          position: relative;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          background-color: black;
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        .animate__fadeInUp {
-          animation: fadeInUp 0.7s ease-out;
+
+        .info-section.visible {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .animate__fadeInLeft {
-          animation: fadeInLeft 0.7s ease-out;
-        }
-        .animate__fadeInRight {
-          animation: fadeInRight 0.7s ease-out;
-        }
-        .animate__pulse {
-          animation: pulse 2s infinite;
+
+        .info-section .text-container {
+          position: relative;
+          z-index: 2;
+          color: white;
         }
       `}</style>
     </div>
