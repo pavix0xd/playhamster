@@ -77,7 +77,7 @@ export default function LandingPage() {
           {/* Scrolling Image Cards */}
           <div className="scroll-container">
             <div className="scroll-content">
-              {[...Array(15)].map((_, index) => (  // Update to the new number of images
+              {[...Array(18)].map((_, index) => (  // Update to the new number of images
                 <div className="card" key={index}>
                   <Image 
                     src={`/images/loopImages/mod-${index + 1}.jpeg`} 
@@ -89,7 +89,7 @@ export default function LandingPage() {
                 </div>
               ))}
               {/* Duplicate images for seamless scrolling */}
-              {[...Array(15)].map((_, index) => (  // Update duplicate count as well
+              {[...Array(18)].map((_, index) => (  // Update duplicate count as well
                 <div className="card" key={`duplicate-${index}`}>
                   <Image 
                     src={`/images/loopImages/mod-${index + 1}.jpeg`} 
