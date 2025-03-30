@@ -114,23 +114,65 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* New Third Section */}
-        <section id="third-section" className="third-section">
+          {/* Expanded Third Section */}
+          <section id="third-section" className="third-section">
           <div className="text-container">
-            <h2 className="display-2 fw-bold">Join the Community</h2>
-            <p className="lead">Connect with millions of gamers and modders. Share, create, and enjoy mods like never before.</p>
-            <button className="btn neon-btn"onClick={() => router.push("/signup")}>Sign Up</button>
+            <div className="text-container lower-section">
+              <h2 className="display-2 fw-bold">Join the Community</h2>
+              <p className="lead">
+                Connect with millions of gamers and modders. Share, create, and explore limitless possibilities.
+              </p>
+              <div className="button-group">
+                <button className="btn neon-btn" onClick={() => router.push("/signup")}>Sign Up</button>
+                <button className="btn neon-btn login-btn" onClick={() => router.push("/login")}>Login</button>
+              </div>
+            </div>
           </div>
 
-          {/* Hogwarts Video as Background */}
+          {/* Video Background */}
           <div className="video-container">
             <video className="third-section-video" autoPlay loop muted playsInline>
               <source src="/hogwarts.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
-          {/* Dark Overlay */}
-      <div className="bg-overlay"></div>
+          <div className="bg-overlay"></div>
+        </section>
+
+        {/* Community Features */}
+        <section className="community-section">
+          <h2 className="display-2 fw-bold">Why Join PlaYHamsteR?</h2>
+          <div className="feature-cards">
+            <div className="feature">
+              <h3>📢 Active Forums</h3>
+              <p>Join discussions with fellow gamers and share your experiences.</p>
+            </div>
+            <div className="feature">
+              <h3>🛠️ Mod Creation Tools</h3>
+              <p>Develop your own mods with our easy-to-use creation tools.</p>
+            </div>
+            <div className="feature">
+              <h3>🎮 Exclusive Content</h3>
+              <p>Access early mod releases and developer-backed projects.</p>
+            </div>
+          </div>
+        </section>
+
+
+        {/*dummy data*/}
+        {/* Testimonials */}
+        <section className="testimonials">
+          <h2 className="display-2 fw-bold">What Our Users Say</h2>
+          <div className="testimonial-cards">
+            <div className="testimonial">
+              <p>&quot;PlaYHamsteR transformed how I play games! The mod library is incredible!&quot;</p>
+              <h4>- Alex G.</h4>
+            </div>
+            <div className="testimonial">
+              <p>&quot;I&#39;ve been able to create and share my own mods, and the community is amazing!&quot;</p>
+              <h4>- Jamie L.</h4>
+            </div>
+          </div>
         </section>
       </main>
 
@@ -167,18 +209,6 @@ export default function LandingPage() {
           height: 100vh;
           background-color: rgba(0, 0, 0, 0.4);
           z-index: -1;
-        }
-
-        .fixed-header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          padding: 20px 80px;
-          z-index: 3;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
         }
 
         .logo-container {
@@ -302,6 +332,29 @@ export default function LandingPage() {
           animation: pulseText 1.5s infinite alternate;
         }
 
+        .third-section {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          padding: 5vh 5vw; /* Reduced top/bottom padding to center content more */
+          text-align: center;
+        }
+
+        .third-section .text-container {
+          position: relative;
+          z-index: 2;
+        }
+
+        .third-section-video {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: -1;
+        }
+
         @keyframes pulseText {
           from {
             opacity: 0.8;
@@ -337,7 +390,7 @@ export default function LandingPage() {
           justify-content: center;
           text-align: center;
           background-color: black;
-          padding: 10rem 2rem; /* Increased padding for more spacing */
+          padding: 10rem 2rem; 
           opacity: 0;
           transform: translateY(50px);
           transition: opacity 0.6s ease, transform 0.6s ease;
@@ -362,7 +415,7 @@ export default function LandingPage() {
           position: relative;
           width: 100%;
           height: 100vh;
-          padding: 10vh 5vw;
+          padding: 50vh 5vw;
           text-align: center;
         }
 
@@ -393,6 +446,76 @@ export default function LandingPage() {
           text-shadow: 0 0 5px rgba(255, 7, 58, 1);
           backdrop-filter: blur(5px);
         }
+
+        .fixed-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding: 20px 80px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: rgba(0, 0, 0, 0.3);
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .fixed-header.hidden {
+          transform: translateY(-100%);
+        }
+
+        .third-section {
+          text-align: center;
+          padding: 10vh 5vw;
+        }
+
+        .button-group {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          margin-top: 20px;
+        }
+
+        .community-section {
+          padding: 5vh 5vw;
+          text-align: center;
+        }
+
+        .feature-cards {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+        }
+
+        .feature {
+          padding: 20px;
+          background: rgba(0, 0, 0, 0.6);
+          border-radius: 10px;
+          width: 250px;
+        }
+
+        .testimonials {
+          padding: 10vh 5vw;
+          text-align: center;
+        }
+
+        .testimonial-cards {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+        }
+
+        .testimonial {
+          background: rgba(255, 255, 255, 0.1);
+          padding: 20px;
+          border-radius: 10px;
+          width: 250px;
+        }
+
+        .lower-section {
+          margin-top: 200px;
+        }
+
       `}</style>
     </div>
   );
