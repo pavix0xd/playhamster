@@ -24,26 +24,31 @@ export default function LandingPage() {
 
   return (
     <div className="landing-page">
-      {/* Hero Section */}
-      <section className="hero vh-100 position-relative d-flex flex-column justify-content-center align-items-center text-center">
-        {/* Background Video */}
-        <video className="bg-video" autoPlay loop muted playsInline>
-          <source src="/ghost.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      {/* Background Video */}
+      <video className="bg-video" autoPlay loop muted playsInline>
+        <source src="/ghost.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
+      {/* Dark Overlay */}
+      <div className="bg-overlay"></div>
+
+      {/* Overlay Content */}
+      <section className="hero vh-100 position-relative d-flex flex-column justify-content-center text-left">
         {/* Logo */}
         <div className="logo-container">
           <Image src="/images/playhamster.png" alt="PlaYHamsteR Logo" width={100} height={100} />
         </div>
 
-        {/* Content */}
-        <h1 className="display-1 fw-bold animate__fadeInDown">Welcome to PlaYHamsteR</h1>
-        <p className="lead animate__fadeInUp">Track upcoming PC game releases & discounts.</p>
-        <button className="btn neon-btn animate__pulse">Get Started</button>
-
-        {/* Login Button */}
-        <a href="/login" className="login-btn">Login</a>
+        {/* Text Content */}
+        <div className="text-content">
+        <h1 className="display-1 fw-bold animate__fadeInLeft">
+          Uncover <br />
+          Tomorrow&apos;s Hits & <br />
+          Today&apos;s Epic Deals.
+        </h1>
+          <button className="btn neon-btn animate__pulse">Get Started</button>
+        </div>
       </section>
 
       {/* Second Section */}
@@ -54,7 +59,7 @@ export default function LandingPage() {
         </video>
 
         <div className="text-container">
-          <h2 className="display-3 animate__fadeInLeft">Discover the Best Deals</h2>
+          <h2 className="display-1 fw-bold animate__fadeInDown">Discover the Best Deals</h2>
           <p className="lead animate__fadeInRight">Get the latest discounts on top PC games.</p>
         </div>
       </section>
@@ -62,40 +67,85 @@ export default function LandingPage() {
       {/* Custom Styles */}
       <style jsx>{`
         .landing-page {
-          background-color: black;
+          position: relative;
+          width: 100%;
+          height: 100vh;
           color: white;
           font-family: 'Bebas Neue', sans-serif;
         }
 
-        .hero {
-          position: relative;
-          overflow: hidden;
-          text-align: center;
-          color: #ff073a;
-        }
-
+        /* Full-Page Background Video */
         .bg-video {
-          position: absolute;
+          position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0.5;
+          z-index: -2;
         }
 
+        /* Dark Overlay */
+        .bg-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: -1;
+        }
+
+        /* Hero Section - Full Left Side */
+        .hero {
+          position: relative;
+          z-index: 2;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          padding-left: 5vw;
+          width: 100%;
+          height: 100vh;
+        }
+
+        /* Logo */
         .logo-container {
           position: absolute;
           top: 20px;
-          left: 20px;
+          left: 50px;
           filter: drop-shadow(0 0 5px #ff073a);
         }
 
+        /* Text Content */
+        .text-content {
+          max-width: 90%;
+        }
+
+        /* Transparent Welcome Text */
+        .text-content h1 {
+          font-size: 6rem;
+          font-weight: bold;
+          line-height: 1.2;
+          animation-name: fadeInDown;
+          color: #ff073a;
+          opacity: 0.5; /* Lower opacity */
+        }
+
+        .text-content p {
+          font-size: 1.5rem;
+          margin-top: 10px;
+          color: #ff073a;
+          opacity: 0.4; /* Lower opacity */
+        }
+
+        /* Transparent Get Started Button */
         .neon-btn {
-          background-color: #ff073a;
+          background-color: rgba(255, 7, 58, 0.8); /* Semi-transparent */
           color: black;
           font-size: 1.5rem;
-          border: none;
+          border: 2px solid rgba(255, 7, 58, 0.8);
           padding: 12px 24px;
           margin-top: 15px;
           transition: 0.3s ease-in-out;
@@ -107,24 +157,7 @@ export default function LandingPage() {
           box-shadow: 0 0 10px #ff073a;
         }
 
-        .login-btn {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          font-size: 1.2rem;
-          background-color: #ff073a;
-          color: black;
-          padding: 8px 16px;
-          border-radius: 5px;
-          transition: 0.3s ease-in-out;
-        }
-
-        .login-btn:hover {
-          background-color: black;
-          color: #ff073a;
-          box-shadow: 0 0 10px #ff073a;
-        }
-
+        /* Info Section */
         .info-section {
           position: relative;
           height: 100vh;
