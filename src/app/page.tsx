@@ -1,13 +1,16 @@
-'use client'
+'use client';
 
+import 'animate.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Image from "next/image";
 import "@fontsource/bebas-neue";
 import "@fontsource/anton";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LandingPage() {
   const [sectionVisible, setSectionVisible] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +24,13 @@ export default function LandingPage() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToThirdSection = () => {
+    const thirdSection = document.getElementById("third-section");
+    if (thirdSection) {
+      thirdSection.scrollIntoView({ behavior: "instant" });
+    }
+  };
 
   return (
     <div className="landing-page">
@@ -38,7 +48,7 @@ export default function LandingPage() {
         <div className="logo-container">
           <Image src="/images/playhamster.png" alt="PlaYHamsteR Logo" width={100} height={100} />
         </div>
-        <button className="btn neon-btn login-btn">Login</button>
+        <button className="btn neon-btn login-btn" onClick={() => router.push("/login")}>Login</button>
       </header>
 
       {/* Hero Section */}
@@ -50,12 +60,12 @@ export default function LandingPage() {
               ESCAPE <br />
               THE REALITY
             </h1>
-            <button className="btn neon-btn animate__pulse">Get Started</button>
+            <button className="btn neon-btn animate__pulse" onClick={scrollToThirdSection}>Get Started</button>
           </div>
         </section>
 
         {/* Info Section with Updated Content */}
-        <section id="next-section" className={`info-section ${sectionVisible ? 'visible' : 'hidden'}`}>
+        <section id="next-section" className={`info-section ${sectionVisible ? 'visible' : 'hidden'} animate__fadeOut`}>
           <div className="video-container">
             <video className="bg-video" autoPlay loop muted playsInline>
               <source src="/got-sunset.mp4" type="video/mp4" />
@@ -77,7 +87,7 @@ export default function LandingPage() {
           {/* Scrolling Image Cards */}
           <div className="scroll-container">
             <div className="scroll-content">
-              {[...Array(18)].map((_, index) => (  // Update to the new number of images
+              {[...Array(18)].map((_, index) => (
                 <div className="card" key={index}>
                   <Image 
                     src={`/images/loopImages/mod-${index + 1}.jpeg`} 
@@ -89,7 +99,7 @@ export default function LandingPage() {
                 </div>
               ))}
               {/* Duplicate images for seamless scrolling */}
-              {[...Array(18)].map((_, index) => (  // Update duplicate count as well
+              {[...Array(18)].map((_, index) => (
                 <div className="card" key={`duplicate-${index}`}>
                   <Image 
                     src={`/images/loopImages/mod-${index + 1}.jpeg`} 
@@ -102,9 +112,32 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
+        </section>
 
+        {/* New Third Section */}
+        <section id="third-section" className="third-section">
+          <div className="text-container">
+            <h2 className="display-2 fw-bold">Join the Community</h2>
+            <p className="lead">Connect with millions of gamers and modders. Share, create, and enjoy mods like never before.</p>
+            <button className="btn neon-btn"onClick={() => router.push("/signup")}>Sign Up</button>
+          </div>
+
+          {/* Hogwarts Video as Background */}
+          <div className="video-container">
+            <video className="third-section-video" autoPlay loop muted playsInline>
+              <source src="/hogwarts.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          {/* Dark Overlay */}
+      <div className="bg-overlay"></div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>© 2025 PlaYHamsteR. All rights reserved.</p>
+      </footer>
 
       {/* Custom Styles */}
       <style jsx>{`
@@ -183,9 +216,19 @@ export default function LandingPage() {
         .text-content {
           max-width: 90%;
           line-height: 1.3;
-        }
-        
-        /* Scrolling Image Cards */
+          }
+
+          @keyframes pulseText {
+            from {
+              opacity: 0.8;
+            }
+            to {
+              opacity: 1;
+              text-shadow: 0 0 15px rgba(255, 7, 58, 1);
+            }
+          }
+
+
         .scroll-container {
           position: relative;
           width: 100%;
@@ -198,19 +241,37 @@ export default function LandingPage() {
 
         .card {
           display: inline-block;
-          width: 250px;   /* Keep the width as is */
-          height: 350px;  /* Increased the height of the card */
+          width: 250px;
+          height: 350px;
           overflow: hidden;
           border-radius: 15px;
           box-shadow: 0 0 10px rgba(255, 7, 58, 0.8);
-          margin: 0 10px; /* Add some margin for spacing */
+          margin: 0 10px;
         }
 
         .card img {
           width: 100%;
           height: 100%;
-          object-fit: cover; /* Ensure images cover the entire card */
+          object-fit: cover;
         }
+
+        .card {
+          display: inline-block;
+          width: 250px;
+          height: 350px;
+          overflow: hidden;
+          border-radius: 15px;
+          background: rgba(0, 0, 0, 0.85);
+          border: 2px solid rgba(255, 7, 58, 0.8);
+          box-shadow: 0 0 10px rgba(255, 7, 58, 0.5);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 20px rgba(255, 7, 58, 1);
+        }
+
 
         @keyframes scrollLoop {
           from {
@@ -224,7 +285,7 @@ export default function LandingPage() {
         .scroll-content {
           display: flex;
           gap: 20px;
-          animation: scrollLoop 40s linear infinite;  /* Slow down the animation by increasing the duration */
+          animation: scrollLoop 40s linear infinite;
         }
 
         .text-content h1 {
@@ -236,6 +297,20 @@ export default function LandingPage() {
           margin-bottom: 2rem;
         }
 
+        .third-section h2 {
+          text-shadow: 0 0 10px rgba(255, 7, 58, 0.8);
+          animation: pulseText 1.5s infinite alternate;
+        }
+
+        @keyframes pulseText {
+          from {
+            opacity: 0.8;
+          }
+          to {
+            opacity: 1;
+            text-shadow: 0 0 15px rgba(255, 7, 58, 1);
+          }
+        }
         .neon-btn {
           background-color: rgba(255, 7, 58, 0.8);
           color: black;
@@ -262,7 +337,7 @@ export default function LandingPage() {
           justify-content: center;
           text-align: center;
           background-color: black;
-          padding: 5rem 2rem;
+          padding: 10rem 2rem; /* Increased padding for more spacing */
           opacity: 0;
           transform: translateY(50px);
           transition: opacity 0.6s ease, transform 0.6s ease;
@@ -280,62 +355,43 @@ export default function LandingPage() {
           left: 0;
           width: 100%;
           height: 100%;
-          overflow: hidden;
+          z-index: -1;
         }
 
-        /* Info overlay with lower opacity to let text shine */
-        .info-overlay {
+        .third-section {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          padding: 10vh 5vw;
+          text-align: center;
+        }
+
+        .third-section .text-container {
+          position: relative;
+          z-index: 2;
+        }
+
+        .third-section-video {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(0, 0, 0, 0.2);
-          z-index: 0;
+          object-fit: cover;
+          z-index: -1;
         }
-
-        .text-container {
+        
+        .footer {
           position: relative;
-          z-index: 10;
+          width: 100%;
+          padding: 20px;
+          text-align: center;
+          background: rgba(255, 7, 58, 0.3);
           color: white;
-          max-width: 80%;
-          line-height: 1.5;
-          padding: 2rem;
-        }
-
-        .text-container h2 {
-          margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-          .text-content h1 {
-            font-size: 3rem;
-            line-height: 1.1;
-          }
-
-          .hero {
-            padding-left: 10vw;
-          }
-
-          .fixed-header {
-            padding: 10px 30px;
-          }
-
-          .text-container {
-            max-width: 90%;
-          }
-
-          .info-section {
-            padding: 2rem;
-          }
-
-          .text-container h2 {
-            font-size: 2rem;
-          }
-
-          .text-container p {
-            font-size: 1rem;
-          }
+          font-size: 1.1rem;
+          font-weight: bold;
+          text-shadow: 0 0 5px rgba(255, 7, 58, 1);
+          backdrop-filter: blur(5px);
         }
       `}</style>
     </div>
