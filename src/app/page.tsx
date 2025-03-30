@@ -34,7 +34,7 @@ export default function LandingPage() {
       <div className="bg-overlay"></div>
 
       {/* Overlay Content */}
-      <section className="hero vh-100 position-relative d-flex flex-column justify-content-center text-left">
+      <section className="hero position-relative d-flex flex-column justify-content-center text-left">
         {/* Logo */}
         <div className="logo-container">
           <Image src="/images/playhamster.png" alt="PlaYHamsteR Logo" width={100} height={100} />
@@ -42,11 +42,11 @@ export default function LandingPage() {
 
         {/* Text Content */}
         <div className="text-content">
-        <h1 className="display-1 fw-bold animate__fadeInLeft">
-          Uncover <br />
-          Tomorrow&apos;s Hits & <br />
-          Today&apos;s Epic Deals.
-        </h1>
+          <h1 className="display-1 fw-bold animate__fadeInLeft">
+            Uncover <br />
+            Tomorrow&apos;s Hits & <br />
+            Today&apos;s Epic Deals.
+          </h1>
           <button className="btn neon-btn animate__pulse">Get Started</button>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default function LandingPage() {
         .landing-page {
           position: relative;
           width: 100%;
-          height: 100vh;
+          min-height: 100vh; /* Ensures full height */
           color: white;
           font-family: 'Bebas Neue', sans-serif;
         }
@@ -80,8 +80,8 @@ export default function LandingPage() {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100%;
-          object-fit: cover;
+          height: 100dvh; /* Ensures full height on all devices */
+          object-fit: cover; /* Prevents video from cutting off */
           z-index: -2;
         }
 
@@ -91,7 +91,7 @@ export default function LandingPage() {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100%;
+          height: 100dvh;
           background-color: rgba(0, 0, 0, 0.5);
           z-index: -1;
         }
@@ -107,14 +107,14 @@ export default function LandingPage() {
           align-items: flex-start;
           padding-left: 5vw;
           width: 100%;
-          height: 100vh;
+          min-height: 100vh; /* Ensures it takes full screen */
         }
 
         /* Logo */
         .logo-container {
           position: absolute;
           top: 20px;
-          left: 50px;
+          left: 80px;
           filter: drop-shadow(0 0 5px #ff073a);
         }
 
@@ -123,28 +123,20 @@ export default function LandingPage() {
           max-width: 90%;
         }
 
-        /* Transparent Welcome Text */
+        /* Transparent Welcome Text (Responsive) */
         .text-content h1 {
-          font-size: 6rem;
+          font-size: clamp(3rem, 8vw, 8rem); /* Responsive font size */
           font-weight: bold;
           line-height: 1.2;
-          animation-name: fadeInDown;
           color: #ff073a;
-          opacity: 0.5; /* Lower opacity */
-        }
-
-        .text-content p {
-          font-size: 1.5rem;
-          margin-top: 10px;
-          color: #ff073a;
-          opacity: 0.4; /* Lower opacity */
+          opacity: 0.5;
         }
 
         /* Transparent Get Started Button */
         .neon-btn {
           background-color: rgba(255, 7, 58, 0.8); /* Semi-transparent */
           color: black;
-          font-size: 1.5rem;
+          font-size: clamp(1rem, 3vw, 1.5rem); /* Adjusts button size */
           border: 2px solid rgba(255, 7, 58, 0.8);
           padding: 12px 24px;
           margin-top: 15px;
@@ -180,6 +172,23 @@ export default function LandingPage() {
           position: relative;
           z-index: 2;
           color: white;
+        }
+
+        /* Ensure no content cutoff on small screens */
+        @media (max-width: 768px) {
+          .text-content h1 {
+            font-size: 3rem; /* Smaller font size for mobile */
+            line-height: 1.1;
+          }
+
+          .hero {
+            padding-left: 10vw; /* Adjust padding for better alignment */
+          }
+
+          .logo-container {
+            left: 30px;
+            top: 10px;
+          }
         }
       `}</style>
     </div>
