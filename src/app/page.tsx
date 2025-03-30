@@ -74,22 +74,34 @@ export default function LandingPage() {
             </p>
           </div>
 
-           {/* Scrolling Image Cards */}
-           <div className="scroll-container">
-          <div className="scroll-content">
-            {[1, 2, 3, 4, 5, 6].map((index) => (
-              <div className="card" key={index}>
-                <Image src={`/images/loopImages/mod-${index}.jpg`} alt={`Mod ${index}`} width={250} height={150} />
-              </div>
-            ))}
-            {/* Duplicate images for seamless scrolling */}
-            {[1, 2, 3, 4, 5, 6].map((index) => (
-              <div className="card" key={`duplicate-${index}`}>
-                <Image src={`/images/loopImages/mod-${index}.jpg`} alt={`Mod ${index}`} width={250} height={150} />
-              </div>
-            ))}
+          {/* Scrolling Image Cards */}
+          <div className="scroll-container">
+            <div className="scroll-content">
+              {[...Array(15)].map((_, index) => (  // Update to the new number of images
+                <div className="card" key={index}>
+                  <Image 
+                    src={`/images/loopImages/mod-${index + 1}.jpeg`} 
+                    alt={`Mod ${index + 1}`} 
+                    width={250} 
+                    height={150} 
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+              {/* Duplicate images for seamless scrolling */}
+              {[...Array(15)].map((_, index) => (  // Update duplicate count as well
+                <div className="card" key={`duplicate-${index}`}>
+                  <Image 
+                    src={`/images/loopImages/mod-${index + 1}.jpeg`} 
+                    alt={`Mod ${index + 1}`} 
+                    width={250} 
+                    height={500} 
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
         </section>
       </main>
@@ -183,20 +195,21 @@ export default function LandingPage() {
           justify-content: center;
           align-items: center;
         }
-        
+
         .card {
           display: inline-block;
-          width: 250px;
-          height: 150px;
+          width: 250px;   /* Keep the width as is */
+          height: 350px;  /* Increased the height of the card */
           overflow: hidden;
           border-radius: 15px;
           box-shadow: 0 0 10px rgba(255, 7, 58, 0.8);
+          margin: 0 10px; /* Add some margin for spacing */
         }
 
         .card img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: cover; /* Ensure images cover the entire card */
         }
 
         @keyframes scrollLoop {
@@ -211,7 +224,7 @@ export default function LandingPage() {
         .scroll-content {
           display: flex;
           gap: 20px;
-          animation: scrollLoop 20s linear infinite;
+          animation: scrollLoop 40s linear infinite;  /* Slow down the animation by increasing the duration */
         }
 
         .text-content h1 {
