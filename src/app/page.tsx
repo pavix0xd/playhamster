@@ -47,15 +47,14 @@ export default function LandingPage() {
           <div className="text-content">
             <h1 className="display-1 fw-bold animate__fadeInLeft">
               <br />
-              ESCAPE
-              THE <br />
-              REALITY
+              ESCAPE <br />
+              THE REALITY
             </h1>
             <button className="btn neon-btn animate__pulse">Get Started</button>
           </div>
         </section>
 
-        {/* Info Section */}
+        {/* Info Section with Updated Content */}
         <section id="next-section" className={`info-section ${sectionVisible ? 'visible' : 'hidden'}`}>
           <div className="video-container">
             <video className="bg-video" autoPlay loop muted playsInline>
@@ -63,11 +62,35 @@ export default function LandingPage() {
               Your browser does not support the video tag.
             </video>
           </div>
+          {/* Reduced opacity for info overlay for better readability */}
+          <div className="info-overlay"></div>
           <div className="bg-overlay"></div>
           <div className="text-container">
-            <h2 className="display-1 fw-bold animate__fadeInDown">Discover the Best Deals</h2>
-            <p className="lead animate__fadeInRight">Get the latest discounts on top PC games.</p>
+            <h2 className="display-1 fw-bold animate__fadeInDown">
+              Explore Our Mod Library
+            </h2>
+            <p className="lead animate__fadeInRight">
+              Browse thousands of user-generated mods for hundreds of games that transform your gaming experience.
+            </p>
           </div>
+
+           {/* Scrolling Image Cards */}
+           <div className="scroll-container">
+          <div className="scroll-content">
+            {[1, 2, 3, 4, 5, 6].map((index) => (
+              <div className="card" key={index}>
+                <Image src={`/images/loopImages/mod-${index}.jpg`} alt={`Mod ${index}`} width={250} height={150} />
+              </div>
+            ))}
+            {/* Duplicate images for seamless scrolling */}
+            {[1, 2, 3, 4, 5, 6].map((index) => (
+              <div className="card" key={`duplicate-${index}`}>
+                <Image src={`/images/loopImages/mod-${index}.jpg`} alt={`Mod ${index}`} width={250} height={150} />
+              </div>
+            ))}
+          </div>
+        </div>
+
         </section>
       </main>
 
@@ -86,7 +109,7 @@ export default function LandingPage() {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100dvh;
+          height: 100vh;
           object-fit: cover;
           z-index: -2;
         }
@@ -96,7 +119,7 @@ export default function LandingPage() {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100dvh;
+          height: 100vh;
           background-color: rgba(0, 0, 0, 0.4);
           z-index: -1;
         }
@@ -114,7 +137,6 @@ export default function LandingPage() {
         }
 
         .logo-container {
-          /* Removed absolute positioning */
           filter: drop-shadow(0 0 5px #ff073a);
         }
 
@@ -140,13 +162,56 @@ export default function LandingPage() {
           flex-direction: column;
           justify-content: center;
           align-items: flex-start;
-          padding-left: 5vw;
+          padding: 10vh 5vw;
           width: 100%;
           min-height: 100vh;
+          margin-bottom: 5rem;
         }
 
         .text-content {
           max-width: 90%;
+          line-height: 1.3;
+        }
+        
+        /* Scrolling Image Cards */
+        .scroll-container {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .card {
+          display: inline-block;
+          width: 250px;
+          height: 150px;
+          overflow: hidden;
+          border-radius: 15px;
+          box-shadow: 0 0 10px rgba(255, 7, 58, 0.8);
+        }
+
+        .card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        @keyframes scrollLoop {
+          from {
+            transform: translateX(0%);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        .scroll-content {
+          display: flex;
+          gap: 20px;
+          animation: scrollLoop 20s linear infinite;
         }
 
         .text-content h1 {
@@ -155,6 +220,7 @@ export default function LandingPage() {
           line-height: 1.2;
           color: #ff073a;
           opacity: 0.5;
+          margin-bottom: 2rem;
         }
 
         .neon-btn {
@@ -183,6 +249,7 @@ export default function LandingPage() {
           justify-content: center;
           text-align: center;
           background-color: black;
+          padding: 5rem 2rem;
           opacity: 0;
           transform: translateY(50px);
           transition: opacity 0.6s ease, transform 0.6s ease;
@@ -203,11 +270,28 @@ export default function LandingPage() {
           overflow: hidden;
         }
 
+        /* Info overlay with lower opacity to let text shine */
+        .info-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.2);
+          z-index: 0;
+        }
+
         .text-container {
           position: relative;
-          z-index: 2;
+          z-index: 10;
           color: white;
           max-width: 80%;
+          line-height: 1.5;
+          padding: 2rem;
+        }
+
+        .text-container h2 {
+          margin-bottom: 1rem;
         }
 
         @media (max-width: 768px) {
