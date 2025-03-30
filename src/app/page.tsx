@@ -33,77 +33,109 @@ export default function LandingPage() {
       {/* Dark Overlay */}
       <div className="bg-overlay"></div>
 
-      {/* Overlay Content */}
-      <section className="hero position-relative d-flex flex-column justify-content-center text-left">
-        {/* Logo */}
+      {/* Fixed Header with Logo and Login Button */}
+      <header className="fixed-header d-flex justify-content-between align-items-center">
         <div className="logo-container">
           <Image src="/images/playhamster.png" alt="PlaYHamsteR Logo" width={100} height={100} />
         </div>
+        <button className="btn neon-btn login-btn">Login</button>
+      </header>
 
-        {/* Text Content */}
-        <div className="text-content">
-          <h1 className="display-1 fw-bold animate__fadeInLeft">
-            <br/>
-            Uncover <br />
-            Tomorrow&apos;s Hits & <br />
-            Today&apos;s Epic Deals.
-          </h1>
-          <button className="btn neon-btn animate__pulse">Get Started</button>
-        </div>
-      </section>
+      {/* Hero Section */}
+      <main>
+        <section className="hero d-flex flex-column justify-content-center text-left">
+          <div className="text-content">
+            <h1 className="display-1 fw-bold animate__fadeInLeft">
+              <br />
+              ESCAPE
+              THE <br />
+              REALITY
+            </h1>
+            <button className="btn neon-btn animate__pulse">Get Started</button>
+          </div>
+        </section>
 
-      {/* Second Section - Modified for Full-Screen & Responsive Design */}
-      <section id="next-section" className={`info-section ${sectionVisible ? 'visible' : 'hidden'}`}>
-        <div className="video-container">
-          <video className="bg-video" autoPlay loop muted playsInline>
-            <source src="/got-sunset.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-
-        <div className="text-container">
-          <h2 className="display-1 fw-bold animate__fadeInDown">Discover the Best Deals</h2>
-          <p className="lead animate__fadeInRight">Get the latest discounts on top PC games.</p>
-        </div>
-      </section>
+        {/* Info Section */}
+        <section id="next-section" className={`info-section ${sectionVisible ? 'visible' : 'hidden'}`}>
+          <div className="video-container">
+            <video className="bg-video" autoPlay loop muted playsInline>
+              <source src="/got-sunset.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div className="bg-overlay"></div>
+          <div className="text-container">
+            <h2 className="display-1 fw-bold animate__fadeInDown">Discover the Best Deals</h2>
+            <p className="lead animate__fadeInRight">Get the latest discounts on top PC games.</p>
+          </div>
+        </section>
+      </main>
 
       {/* Custom Styles */}
       <style jsx>{`
         .landing-page {
           position: relative;
           width: 100%;
-          min-height: 100vh; /* Ensures full height */
+          min-height: 100vh;
           color: white;
           font-family: 'Bebas Neue', sans-serif;
         }
 
-        /* Full-Page Background Video */
         .bg-video {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
-          height: 100dvh; /* Ensures full height on all devices */
-          object-fit: cover; /* Prevents video from cutting off */
+          height: 100dvh;
+          object-fit: cover;
           z-index: -2;
         }
 
-        /* Dark Overlay */
         .bg-overlay {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           height: 100dvh;
-          background-color: rgba(0, 0, 0, 0.5);
+          background-color: rgba(0, 0, 0, 0.4);
           z-index: -1;
         }
 
-        /* Hero Section */
+        .fixed-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding: 20px 80px;
+          z-index: 3;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo-container {
+          /* Removed absolute positioning */
+          filter: drop-shadow(0 0 5px #ff073a);
+        }
+
+        .login-btn {
+          background-color: rgba(255, 7, 58, 0.8);
+          color: black;
+          font-size: clamp(0.7rem, 1.5vw, 1rem);
+          border: 2px solid rgba(255, 7, 58, 0.8);
+          padding: 5px 10px;
+          transition: 0.3s ease-in-out;
+        }
+
+        .login-btn:hover {
+          background-color: black;
+          color: #ff073a;
+          box-shadow: 0 0 10px #ff073a;
+        }
+
         .hero {
           position: relative;
           z-index: 2;
-          text-align: left;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -113,28 +145,18 @@ export default function LandingPage() {
           min-height: 100vh;
         }
 
-        /* Logo */
-        .logo-container {
-          position: absolute;
-          top: 20px;
-          left: 80px;
-          filter: drop-shadow(0 0 5px #ff073a);
-        }
-
-        /* Text Content */
         .text-content {
           max-width: 90%;
         }
 
         .text-content h1 {
-          font-size: clamp(3rem, 8vw, 8rem);
+          font-size: clamp(3rem, 8vw, 9rem);
           font-weight: bold;
           line-height: 1.2;
           color: #ff073a;
           opacity: 0.5;
         }
 
-        /* Transparent Get Started Button */
         .neon-btn {
           background-color: rgba(255, 7, 58, 0.8);
           color: black;
@@ -151,7 +173,6 @@ export default function LandingPage() {
           box-shadow: 0 0 10px #ff073a;
         }
 
-        /* Info Section - Modified */
         .info-section {
           position: relative;
           width: 100%;
@@ -173,7 +194,6 @@ export default function LandingPage() {
           transform: translateY(0);
         }
 
-        /* Video Container to Prevent Clipping */
         .video-container {
           position: absolute;
           top: 0;
@@ -183,12 +203,6 @@ export default function LandingPage() {
           overflow: hidden;
         }
 
-        .bg-video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
         .text-container {
           position: relative;
           z-index: 2;
@@ -196,7 +210,6 @@ export default function LandingPage() {
           max-width: 80%;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
           .text-content h1 {
             font-size: 3rem;
@@ -207,9 +220,8 @@ export default function LandingPage() {
             padding-left: 10vw;
           }
 
-          .logo-container {
-            left: 30px;
-            top: 10px;
+          .fixed-header {
+            padding: 10px 30px;
           }
 
           .text-container {
