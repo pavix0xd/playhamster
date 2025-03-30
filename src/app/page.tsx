@@ -43,6 +43,7 @@ export default function LandingPage() {
         {/* Text Content */}
         <div className="text-content">
           <h1 className="display-1 fw-bold animate__fadeInLeft">
+            <br/>
             Uncover <br />
             Tomorrow&apos;s Hits & <br />
             Today&apos;s Epic Deals.
@@ -51,12 +52,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Second Section */}
+      {/* Second Section - Modified for Full-Screen & Responsive Design */}
       <section id="next-section" className={`info-section ${sectionVisible ? 'visible' : 'hidden'}`}>
-        <video className="bg-video" autoPlay loop muted playsInline>
-          <source src="/batman.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <div className="video-container">
+          <video className="bg-video" autoPlay loop muted playsInline>
+            <source src="/got-sunset.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
 
         <div className="text-container">
           <h2 className="display-1 fw-bold animate__fadeInDown">Discover the Best Deals</h2>
@@ -96,7 +99,7 @@ export default function LandingPage() {
           z-index: -1;
         }
 
-        /* Hero Section - Full Left Side */
+        /* Hero Section */
         .hero {
           position: relative;
           z-index: 2;
@@ -107,7 +110,7 @@ export default function LandingPage() {
           align-items: flex-start;
           padding-left: 5vw;
           width: 100%;
-          min-height: 100vh; /* Ensures it takes full screen */
+          min-height: 100vh;
         }
 
         /* Logo */
@@ -123,9 +126,8 @@ export default function LandingPage() {
           max-width: 90%;
         }
 
-        /* Transparent Welcome Text (Responsive) */
         .text-content h1 {
-          font-size: clamp(3rem, 8vw, 8rem); /* Responsive font size */
+          font-size: clamp(3rem, 8vw, 8rem);
           font-weight: bold;
           line-height: 1.2;
           color: #ff073a;
@@ -134,9 +136,9 @@ export default function LandingPage() {
 
         /* Transparent Get Started Button */
         .neon-btn {
-          background-color: rgba(255, 7, 58, 0.8); /* Semi-transparent */
+          background-color: rgba(255, 7, 58, 0.8);
           color: black;
-          font-size: clamp(1rem, 3vw, 1.5rem); /* Adjusts button size */
+          font-size: clamp(1rem, 3vw, 1.5rem);
           border: 2px solid rgba(255, 7, 58, 0.8);
           padding: 12px 24px;
           margin-top: 15px;
@@ -149,11 +151,13 @@ export default function LandingPage() {
           box-shadow: 0 0 10px #ff073a;
         }
 
-        /* Info Section */
+        /* Info Section - Modified */
         .info-section {
           position: relative;
+          width: 100%;
           height: 100vh;
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
           text-align: center;
@@ -161,6 +165,7 @@ export default function LandingPage() {
           opacity: 0;
           transform: translateY(50px);
           transition: opacity 0.6s ease, transform 0.6s ease;
+          overflow: hidden;
         }
 
         .info-section.visible {
@@ -168,26 +173,59 @@ export default function LandingPage() {
           transform: translateY(0);
         }
 
-        .info-section .text-container {
+        /* Video Container to Prevent Clipping */
+        .video-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+
+        .bg-video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .text-container {
           position: relative;
           z-index: 2;
           color: white;
+          max-width: 80%;
         }
 
-        /* Ensure no content cutoff on small screens */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
           .text-content h1 {
-            font-size: 3rem; /* Smaller font size for mobile */
+            font-size: 3rem;
             line-height: 1.1;
           }
 
           .hero {
-            padding-left: 10vw; /* Adjust padding for better alignment */
+            padding-left: 10vw;
           }
 
           .logo-container {
             left: 30px;
             top: 10px;
+          }
+
+          .text-container {
+            max-width: 90%;
+          }
+
+          .info-section {
+            padding: 2rem;
+          }
+
+          .text-container h2 {
+            font-size: 2rem;
+          }
+
+          .text-container p {
+            font-size: 1rem;
           }
         }
       `}</style>
