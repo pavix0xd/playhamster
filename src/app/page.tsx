@@ -144,36 +144,43 @@ export default function LandingPage() {
           <h2 className="display-2 fw-bold">Why Join PlaYHamsteR?</h2>
           <div className="feature-cards">
             <div className="feature">
-              <h3>📢 Active Forums</h3>
-              <p>Join discussions with fellow gamers and share your experiences.</p>
+              <h3>Download Millions of Mods</h3>
+              <p>Explore an extensive collection of mods from around the globe, enhancing your gaming experience like never before.</p>
             </div>
             <div className="feature">
-              <h3>🛠️ Mod Creation Tools</h3>
-              <p>Develop your own mods with our easy-to-use creation tools.</p>
+              <h3>Upload and Create Your Own Mods</h3>
+              <p>Contribute to our vast mod library by uploading your creations, showcasing your creativity to the community.</p>
             </div>
             <div className="feature">
-              <h3>🎮 Exclusive Content</h3>
-              <p>Access early mod releases and developer-backed projects.</p>
+              <h3>Connect and Collaborate</h3>
+              <p>Engage with fellow modders, share insights, and collaborate on exciting projects, fostering a vibrant creative community.</p>
             </div>
           </div>
         </section>
 
-
-        {/*dummy data*/}
-        {/* Testimonials */}
-        <section className="testimonials">
-          <h2 className="display-2 fw-bold">What Our Users Say</h2>
-          <div className="testimonial-cards">
-            <div className="testimonial">
-              <p>&quot;PlaYHamsteR transformed how I play games! The mod library is incredible!&quot;</p>
-              <h4>- Alex G.</h4>
+        {/* How It Works Section */}
+        <section className="how-it-works">
+          <h2 className="display-2 fw-bold">How It Works</h2>
+          <div className="steps">
+            <div className="step">
+              <h3>1. Browse Mods</h3>
+              <p>Search for mods by category, game, or trending content.</p>
             </div>
-            <div className="testimonial">
-              <p>&quot;I&#39;ve been able to create and share my own mods, and the community is amazing!&quot;</p>
-              <h4>- Jamie L.</h4>
+            <div className="step">
+              <h3>2. Download & Install</h3>
+              <p>Follow easy installation guides to add mods to your game.</p>
+            </div>
+            <div className="step">
+              <h3>3. Share & Create</h3>
+              <p>Upload your own mods and connect with other gamers.</p>
             </div>
           </div>
+
+          <div className="enjoy-section">
+          <h1>ENJOY</h1>
+        </div>
         </section>
+
       </main>
 
       {/* Footer */}
@@ -494,28 +501,59 @@ export default function LandingPage() {
           width: 250px;
         }
 
-        .testimonials {
-          padding: 10vh 5vw;
-          text-align: center;
-        }
+        .how-it-works {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 60px;
+            text-align: center;
+          }
 
-        .testimonial-cards {
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-        }
+          .how-it-works h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+          }
 
-        .testimonial {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 20px;
-          border-radius: 10px;
-          width: 250px;
-        }
+          .steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+          }
+
+          .step {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+          }
+
+          .step h3 {
+            font-size: 1.8rem;
+          }
+          .enjoy-section {
+            width: 100%;
+            text-align: center;
+            color: #ff073a;
+            font-size: 6rem; 
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 2rem 0;
+            position: relative;
+            bottom: 0;
+            animation: pulseText 1.5s infinite alternate;
+          }
+
+          @keyframes pulseText {
+            from {
+              opacity: 0.5;
+            }
+            to {
+              opacity: 0.8;
+              text-shadow: 0 0 15px rgba(255, 7, 58, 1);
+            }
+          }
 
         .lower-section {
           margin-top: 200px;
         }
-
       `}</style>
     </div>
   );
