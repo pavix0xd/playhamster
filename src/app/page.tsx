@@ -28,7 +28,7 @@ export default function LandingPage() {
   const scrollToThirdSection = () => {
     const thirdSection = document.getElementById("third-section");
     if (thirdSection) {
-      thirdSection.scrollIntoView({ behavior: "instant" });
+      thirdSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
