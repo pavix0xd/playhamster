@@ -543,10 +543,10 @@ export default function LandingPage() {
 
           @keyframes pulseText {
             from {
-              opacity: 0.5;
+              opacity: 1;
             }
             to {
-              opacity: 0.8;
+              opacity: 2;
               text-shadow: 0 0 15px rgba(255, 7, 58, 1);
             }
           }
