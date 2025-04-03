@@ -48,7 +48,7 @@ export default function LandingPage() {
         <div className="logo-container">
           <Image src="/images/playhamster.png" alt="PlaYHamsteR Logo" width={100} height={100} />
         </div>
-        <button className="btn neon-btn login-btn" onClick={() => router.push("/login")}>Login</button>
+        {/* <button className="btn neon-btn login-btn" onClick={() => router.push("/login")}>Login</button> */}
       </header>
 
       {/* Hero Section */}
@@ -463,7 +463,7 @@ export default function LandingPage() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: rgba(0, 0, 0, 0.3);
+          background: rgba(0, 0, 0, 0);
           transition: transform 0.3s ease-in-out;
         }
 
